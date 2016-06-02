@@ -62,7 +62,7 @@ type TopEventsResult struct {
 
 type CommonEventsResult []string
 
-func NewMixpanel(key string, secret string) *Mixpanel {
+func NewMixpanel() *Mixpanel {
 	ma, err := NewMixpanelAuth()
 	if err != nil {
 		log.Fatal(err)

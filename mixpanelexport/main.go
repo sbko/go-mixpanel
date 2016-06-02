@@ -11,8 +11,6 @@ import (
 
 var (
 	m      *mixpanel.Mixpanel
-	key    string
-	secret string
 	event  string
 	start  string
 	end    string
@@ -33,7 +31,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	m = mixpanel.NewMixpanel(key, secret)
+	m = mixpanel.NewMixpanel()
 	params := map[string]string{
 		"from_date": start,
 		"to_date":   end,
