@@ -124,12 +124,16 @@ func (m *Mixpanel) MakeRequest(action string, params map[string]string) ([]byte,
 	event, ok := params["event"]
 	delete(params, "event")
 	if ok && event != "" {
-		events := strings.Split(event, ",")
-		bytes, err := json.Marshal(events)
-		if err != nil {
-			return []byte{}, err
+		if action == "export" {
+			events := strings.Split(event, ",")
+			bytes, err := json.Marshal(events)
+			if err != nil {
+				return []byte{}, err
+			}
+			params["event"] = string(bytes)
+		} else {
+			params["event"] = event
 		}
-		params["event"] = string(bytes)
 	}
 
 	m.AddExpire(&params)
